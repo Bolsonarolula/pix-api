@@ -1,0 +1,13 @@
+{
+  "name": "pix-api",
+  "version": "1.0.0",
+  "description": "API para gerar PIX via SigiloPay",
+  "main": "api/payment.js",
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "vercel": "^33.0.0"
+  }
+}
