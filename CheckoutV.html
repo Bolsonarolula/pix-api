@@ -1,0 +1,596 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+    
+<script>
+  window.pixelId = "686b418d96c0b94341250e24";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+
+<script src="js/latest.js" data-utmify-prevent-xcod-sck="" data-utmify-prevent-subids="" async="" defer=""></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Biblioteca QRCode.js para gerar QR codes -->
+    <script src="js/qrcode.min.js"></script>
+<style>* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: #4A2B0F;
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.id-number {
+    color: #4A2B0F;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.value-input {
+    display: flex;
+    position: relative;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.currency-prefix {
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-right: none;
+    border-radius: 5px 0 0 5px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    color: #333;
+    font-weight: 500;
+}
+
+.value-field {
+    flex: 1;
+    border: 1px solid #ddd;
+    border-radius: 0 5px 5px 0;
+    padding: 10px 15px;
+    font-size: 16px;
+    outline: none;
+}
+
+.payment-methods {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.payment-option {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.payment-option.pix {
+    background-color: #22c55e;
+    border-color: #22c55e;
+    color: white;
+}
+
+.radio-button {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+}
+
+.payment-option.pix .radio-button {
+    border-color: white;
+}
+
+.payment-option.pix .radio-button::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.charity-options {
+    border: 1px dashed #ccc;
+    border-radius: 5px;
+    display: flex;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.charity-item {
+    flex: 1;
+    padding: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: white;
+    color: #333;
+    border-right: 1px dashed #a1a1a1;
+    height: 120px;
+    justify-content: center;
+}
+
+.charity-item:last-child {
+    border-right: none;
+}
+
+.charity-item.selected {
+    background-color: rgba(34, 197, 94, 0.6); /* Fundo semi-transparente */
+    color: #ffffff; /* Texto branco puro para maior contraste */
+    text-shadow: 1px 1px 2px rgba(85, 85, 85, 0.5); /* Sombra sutil */
+}
+
+.charity-item.selected:last-child {
+    border-right: none;
+}
+
+.charity-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+    overflow: hidden;
+}
+
+.charity-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.heart-icon {
+    background-color: #f0f9ff;
+}
+
+.society-icon {
+    background-color: #f0fdf4;
+}
+
+.lucky-icon {
+    background-color: #22c55e;
+}
+
+.charity-item.selected .charity-icon {
+    background-color: white;
+}
+
+.charity-item.selected .charity-icon img {
+    filter: none; /* Remove qualquer alteraÃ§Ã£o na imagem */
+}
+
+.charity-name {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.charity-price {
+    font-size: 12px;
+    color: #666;
+}
+
+.charity-item.selected .charity-price {
+    color: white;
+}
+
+.lucky-text {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.summary {
+    margin-bottom: 20px;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: #666;
+    font-size: 14px;
+}
+
+.divider {
+    height: 1px;
+    background-color: #eee;
+    margin: 15px 0;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.custom-checkbox {
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    margin-top: 2px;
+}
+
+.checkbox-label {
+    font-size: 14px;
+    color: #333;
+}
+
+.privacy-notice {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 30px;
+    margin-left: 28px;
+}
+
+.contribute-button {
+    background-color: #22c55e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 15px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.contribute-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.contribute-button.processing {
+    position: relative;
+    color: transparent;
+}
+
+.contribute-button.processing::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 24px;
+    height: 24px;
+    margin: -12px 0 0 -12px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.error-message {
+    color: #dc2626;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none; /* Inicialmente oculto */
+}
+</style></head>
+
+
+<body>
+    <div class="main-content">
+        <header>
+            <div class="container">
+                <div class="content-header d-flex align-items-center justify-content-between">
+                    <div class="logo">
+                        <a href="#"><img src="images/logo.svg" alt="Vakinha Online"></a>
+                    </div>
+                </div>
+            </div>
+        </header>
+<br>
+        <h1>A Ellen precisa da sua ajuda, isso é um pedido de socorro!
+</h1>
+        <div class="id-number">ID: 5578968</div>
+
+        <div class="value-input">
+            <div class="currency-prefix">R$</div>
+            <input type="tel" id="contribution-input" class="value-field" value="0,00">
+        </div>
+        <div id="error-message" class="error-message">
+            Valor mínimo da doação é de R$ 15,00
+        </div>
+        <div id="max-error-message" class="error-message">
+            Valor máximo permitido é de R$ 1.000,00
+        </div>
+
+        <div class="section-title">Forma de pagamento</div>
+        <div class="payment-methods">
+            <div class="payment-option pix">
+                <span class="radio-button"></span>
+                <span>Pix</span>
+            </div>
+        </div>
+
+        <div class="section-title">Turbine sua doação</div>
+        <div class="summary-item">
+            <span>Ajude MUITO MAIS turbinando sua doação 💚</span>
+        </div>
+        <div class="charity-options">
+            <div class="charity-item" data-value="44.30">
+                <div class="charity-icon heart-icon">
+                    <img src="images/lunam.png" alt="Ícone de Coração">
+                </div>
+                <div class="charity-name">Multiplicador de impacto</div>
+                <div class="charity-price">R$ 44,30</div>
+            </div>
+            <div class="charity-item" data-value="27.99">
+                <div class="charity-icon society-icon">
+                    <img src="images/lunap.png" alt="Ícone de Sociedade">
+                </div>
+                <div class="charity-name">Materiais de Estudo</div>
+                <div class="charity-price">R$ 27,99</div>
+            </div>
+            <div class="charity-item" data-value="35.99">
+                <div class="charity-icon society-icon">
+                    <img src="images/lunaa.png" alt="Ícone de Sociedade">
+                </div>
+                <div class="charity-name">Doar cesta básica</div>
+                <div class="charity-price">R$ 35,99</div>
+            </div>
+        </div>
+
+        <div class="summary">
+            <div class="summary-item">
+                <span>Contribuição:</span>
+                <span>R$ 0,00</span>
+            </div>
+            <div class="divider"></div>
+            <div class="summary-item">
+                <span>Total:</span>
+                <span>R$ 0,00</span>
+            </div>
+        </div>
+
+        <button class="contribute-button">Contribuir</button>
+    </div>
+
+    <script>
+        // Variável global para compatibilidade com o código NinjaPay
+        var ninjapay_ajax = {
+            nonce: 'abc123' // Substitua por um nonce real se necessário
+        };
+    </script>
+    <script>document.addEventListener("DOMContentLoaded", () => {
+  // Elementos do formulário
+  const contributionInput = document.getElementById("contribution-input")
+  const errorMessage = document.getElementById("error-message")
+  const maxErrorMessage = document.getElementById("max-error-message")
+  const contributeButton = document.querySelector(".contribute-button")
+  const paymentOption = document.querySelector(".payment-option.pix")
+  const charityItems = document.querySelectorAll(".charity-item")
+  const summaryContribution = document.querySelector(".summary-item:first-child span:last-child")
+  const summaryTotal = document.querySelector(".summary-item:last-child span:last-child")
+
+  // Variáveis de controle
+  let selectedAmount = 0
+  const additionalAmounts = [] // Array para armazenar múltiplos valores adicionais
+  const MIN_AMOUNT = 15
+  const MAX_AMOUNT = 1000
+
+  // Definir os valores corretos para cada item
+  const itemValues = {
+    "Vacina Antirrábica": 44.3,
+    "1kg de ração": 17.99,
+    "Sabonete Matacura": 15.99,
+  }
+
+  // Formatar valor como moeda
+  function formatCurrency(value) {
+    return Number(Number.parseFloat(value).toFixed(2)).toLocaleString("pt-BR", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    })
+  }
+
+  // Atualizar resumo
+  function updateSummary() {
+    // Calcular o total somando o valor base e todos os adicionais selecionados
+    const additionalTotal = additionalAmounts.reduce((sum, amount) => sum + amount, 0)
+    const total = selectedAmount + additionalTotal
+
+    summaryContribution.textContent = `R$ ${formatCurrency(selectedAmount)}`
+    summaryTotal.textContent = `R$ ${formatCurrency(total)}`
+
+    // Arredondar para 2 casas decimais para evitar problemas de comparação
+    const roundedTotal = Math.round(total * 100) / 100
+
+    // Habilitar/desabilitar botão com base no valor mínimo
+    if (roundedTotal >= MIN_AMOUNT && roundedTotal <= MAX_AMOUNT) {
+      contributeButton.classList.add("active")
+      errorMessage.style.display = "none"
+      maxErrorMessage.style.display = "none"
+    } else if (roundedTotal > MAX_AMOUNT) {
+      contributeButton.classList.remove("active")
+      errorMessage.style.display = "none"
+      maxErrorMessage.style.display = "block"
+    } else {
+      contributeButton.classList.remove("active")
+      errorMessage.style.display = "block"
+      maxErrorMessage.style.display = "none"
+    }
+
+    // Log para debug
+    console.log("Valores adicionais:", additionalAmounts)
+    console.log("Total adicional:", additionalTotal)
+    console.log("Total geral:", total)
+  }
+
+  // Inicializar máscara de moeda no input
+  function initCurrencyMask() {
+    contributionInput.addEventListener("input", (e) => {
+      let value = e.target.value.replace(/\D/g, "")
+      value = (Number.parseInt(value) / 100).toFixed(2)
+      e.target.value = formatCurrency(value)
+
+      // Corrigir a conversão do valor para número
+      selectedAmount = Number.parseFloat(value)
+      updateSummary()
+    })
+
+    // Inicializar com 0,00
+    contributionInput.value = formatCurrency(0)
+  }
+
+  // Configurar os itens de caridade
+  function setupCharityItems() {
+    // Mapa para rastrear quais itens estão selecionados e seus índices no array
+    const selectedItemsMap = new Map()
+
+    charityItems.forEach((item) => {
+      // Obter o nome do item
+      const itemName = item.querySelector(".charity-name").textContent
+
+      // Definir o valor correto baseado no nome
+      if (itemValues[itemName]) {
+        item.dataset.value = itemValues[itemName].toString()
+      }
+
+      // Adicionar evento de clique
+      item.addEventListener("click", function () {
+        const value = Number.parseFloat(this.dataset.value)
+        const itemId = this.dataset.value + "-" + itemName // ID único para o item
+
+        // Toggle seleção
+        if (this.classList.contains("selected")) {
+          // Remover seleção
+          this.classList.remove("selected")
+
+          // Se o item estiver no mapa, remova-o do array usando o índice armazenado
+          if (selectedItemsMap.has(itemId)) {
+            const index = selectedItemsMap.get(itemId)
+            additionalAmounts.splice(index, 1)
+
+            // Atualizar os índices no mapa após a remoção
+            selectedItemsMap.forEach((val, key) => {
+              if (val > index) {
+                selectedItemsMap.set(key, val - 1)
+              }
+            })
+
+            // Remover o item do mapa
+            selectedItemsMap.delete(itemId)
+          }
+        } else {
+          // Adicionar seleção
+          this.classList.add("selected")
+
+          // Adicionar valor ao array e armazenar seu índice no mapa
+          additionalAmounts.push(value)
+          selectedItemsMap.set(itemId, additionalAmounts.length - 1)
+        }
+
+        updateSummary()
+      })
+    })
+  }
+
+  // Inicializar
+  function init() {
+    // Inicializar máscara de moeda
+    initCurrencyMask()
+
+    // Configurar itens de caridade
+    setupCharityItems()
+
+    // Marcar PIX como selecionado por padrão
+    paymentOption.classList.add("selected")
+
+    // Esconder mensagens de erro inicialmente
+    errorMessage.style.display = "none"
+    maxErrorMessage.style.display = "none"
+
+    // Atualizar resumo inicial
+    updateSummary()
+  }
+
+  // Processar pagamento
+  contributeButton.addEventListener("click", () => {
+    const additionalTotal = additionalAmounts.reduce((sum, amount) => sum + amount, 0)
+    const total = selectedAmount + additionalTotal
+
+    // Arredondar para 2 casas decimais para evitar problemas de comparação
+    const roundedTotal = Math.round(total * 100) / 100
+
+    // Verificar valor mínimo
+    if (roundedTotal < MIN_AMOUNT) {
+      errorMessage.style.display = "block"
+      return
+    }
+
+    // Verificar valor máximo
+    if (roundedTotal > MAX_AMOUNT) {
+      maxErrorMessage.style.display = "block"
+      return
+    }
+
+    // Mostrar indicador de carregamento no botão
+    contributeButton.innerHTML = '<div class="spinner-small"></div> Processando...'
+    contributeButton.disabled = true
+
+    // Redirecionar para a página de pagamento com o valor como parâmetro
+     window.location.href = `pix-display.html?amount=${roundedTotal}`
+
+  // Inicializar tudo
+  init()
+})
+
+
+</script>
+
+
+</body></html>
